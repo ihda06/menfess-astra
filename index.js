@@ -215,4 +215,10 @@ const tweetDM = async (list) => {
   return successMenfess;
 };
 
+// export const clearDM = async()=>{
+//   const list = await getDM();
+  
+  
+// }
+
 export default menfessBot;
