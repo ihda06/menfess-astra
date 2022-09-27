@@ -79,7 +79,7 @@ const verifyFollback = async (id, dmID) => {
       user_id: [id],
     });
     for (const friendship of friendships) {
-      if (friendship.connections.includes("following")) {
+      if (friendship.connections.includes("followed_by")) {
         return true;
       } else {
         //jika belum di follow
@@ -214,7 +214,5 @@ const tweetDM = async (list) => {
   }
   return successMenfess;
 };
-
-
 
 export default menfessBot;
