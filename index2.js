@@ -8,7 +8,7 @@ import Cron from "node-cron";
 const bot = menfessBot;
 
 const app = Express();
-const port = 3030;
+const port = process.env.PORT || 5000;
 
 const task = Cron.schedule(
   "*/2 * * * *",
