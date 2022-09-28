@@ -3,6 +3,7 @@
 import menfessBot, { getDM } from "./index.js";
 import Express from "express";
 import Cron from "node-cron";
+import open from "open";
 
 // const express = require('express');
 const bot = menfessBot;
@@ -16,6 +17,18 @@ const task = Cron.schedule(
     console.log("session started");
     await bot();
     console.log("session ended");
+  },
+  { scheduled: false }
+);
+const wakeUp = Cron.schedule(
+  "*/29 0-23 * * *",
+  async () => {
+    try {
+      await open("https://bot-menfess-astra.herokuapp.com/on");
+      console.log("Bot restarted");
+    } catch (error) {
+      console.log(error);
+    }
   },
   { scheduled: false }
 );
@@ -47,6 +60,7 @@ app.get("/dm", async (req, res, next) => {
 });
 app.get("/on", async (req, res, next) => {
   task.start();
+  // wakeUp.start();
   res.send("Job started");
   console.log("job started");
 });
@@ -57,8 +71,14 @@ app.get("/stop", async (req, res, next) => {
   console.log("job stopped");
 });
 
-app.get("/tweet", async () => {
-  const tweetResult = await twitterBot.twe;
+app.get("/cekopen", async (req, res, next) => {
+  res.send("congrats brow")
+  console.log("opened");  
+});
+
+app.get("/open", async (req,res, next) => {
+  open('https://bot-menfess-astra.herokuapp.com/cekopen')
+  res.send("wake up")
 });
 
 app.listen(port, () => {
