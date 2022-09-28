@@ -19,10 +19,8 @@ const task = Cron.schedule(
 
 app.get("/", async (req, res) => {
   res.write("<h1>welcome to pembelajaran bot twitter</h1>");
-  res.write("<h4>Initializing bot<h4>");
-  res.end();
   task.start();
-  res.write("<h4>Task started<h4>");
+  res.write("<h4>Started<h4>");
   res.end();
   console.log("Task started");
 });
