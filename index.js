@@ -9,21 +9,24 @@ let senderHistory = [];
 const menfessBot = async () => {
   let report = [];
   let listDM = await getDM();
-
-  listDM = await getVerifiedFollback(listDM);
-
-  listDM = await getVerifiedKeyword(listDM);
-
-  listDM = await getVerifiedMultiMenfess(listDM);
-
-  report = await tweetDM(listDM);
-  console.log("Report success menfess below");
-  if (report.length === 0) {
-    console.log(`no menfess was sended`);
+  if (listDM.length === 0) {
+    console.log("DM kosong, tidak ada menfess terkirim");
   } else {
-    for (const success of report) {
-      console.log(`Sender ID : ${success.message_create.sender_id}`);
-      console.log(`Tweet ID : ${success.tweet_id}`);
+    listDM = await getVerifiedFollback(listDM);
+
+    listDM = await getVerifiedKeyword(listDM);
+
+    listDM = await getVerifiedMultiMenfess(listDM);
+
+    report = await tweetDM(listDM);
+    console.log("Report success menfess below");
+    if (report.length === 0) {
+      console.log(`no menfess was sended`);
+    } else {
+      for (const success of report) {
+        console.log(`Sender ID : ${success.message_create.sender_id}`);
+        console.log(`Tweet ID : ${success.tweet_id}`);
+      }
     }
   }
 };
@@ -116,7 +119,7 @@ const getVerifiedFollback = async (list) => {
 const verifyKeyword = (dm) => {
   const text = dm;
 
-  if (text.search(/Hey!/) >= 0) {
+  if (text.search(/Cjr!/) >= 0) {
     return true;
   }
 };
@@ -217,8 +220,7 @@ const tweetDM = async (list) => {
 
 // export const clearDM = async()=>{
 //   const list = await getDM();
-  
-  
+
 // }
 
 export default menfessBot;
